@@ -399,6 +399,14 @@ config
       width: 600,
       height: 100,
     },
+  ])
+  .setAdUnits('industrial-automation-today', [
+    {
+      name: 'header',
+      id: '6a984685c4136290b254b1d0',
+      width: 600,
+      height: 100,
+    },
   ]);
 
 module.exports = config;

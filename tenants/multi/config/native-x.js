@@ -346,5 +346,14 @@ module.exports = {
       'inline-4': '6a628d7fb9a85e4c980e17c5',
       'inline-5': '6a628d81fa317232a16a3686',
     },
+    'industrial-automation-today': {
+      'toc-1': '6a9848da2c4ae406078e9d6d',
+      'toc-2': '6a9848dec57707b60f3667e3',
+      'inline-1': '6a9848e4c4136290b254b1d2',
+      'inline-2': '6a9848e6c4136290b254b1d4',
+      'inline-3': '6a9848e9c4136290b254b1d6',
+      'inline-4': '6a9848eb2c4ae406078e9d6f',
+      'inline-5': '6a9848edc4136290b254b1d8',
+    },
   },
 };
