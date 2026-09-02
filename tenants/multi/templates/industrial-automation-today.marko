@@ -1,0 +1,197 @@
+import contentList from "@industrial-media/common/graphql/fragments/content-list";
+import { get } from "@mindful-web/object-path";
+import moment from "moment";
+import defaultValue from "@mindful-web/marko-core/utils/default-value";
+
+$ const { website, config, req } = out.global;
+$ const { newsletter, date, dateInfo } = input;
+$ const primaryColor = "#45ad35";
+$ const nativeX = (date >= moment(config.get("mindfulAdsDate"))) ? config.getAsObject("nativeX") : false;
+$ const align = defaultValue(input.align, "right");
+
+$ const { query } = req;
+$ const mindful = query.mindful && query.mindful === "false" ? false : true;
+
+<marko-newsletter-root
+  title=newsletter.name
+  description=newsletter.description
+  date=date
+>
+  <@head>
+    <common-static-styles />
+  </@head>
+  <@body style="margin: 0px !important;">
+    <marko-newsletter-stealth-link newsletter=newsletter date=date />
+    <tenant-banner-element
+      newsletter=newsletter
+      date=date
+      date-info=dateInfo
+    />
+
+    <!-- Header -->
+    <common-default-header-block
+      name=newsletter.name
+      href=website.get("origin")
+      image-src="/files/base/indm/all/image/static/logos/iat-ien-black-badge.jpg"
+      bg-color="#ffffff"
+    >
+      <@wrapper date=date separator-type="date"/>
+    </common-default-header-block>
+
+    <!-- Content -->
+    <common-featured-full-block
+      section-id=91063,
+      limit=1,
+      title="FEATURED STORY",
+      date=date,
+      newsletter=newsletter,
+      primary-color=primaryColor,
+      hr-below=true,
+    />
+
+    <common-table width="630" style="border-collapse:collapse;" align="center" class="main" padding=0 spacing=0>
+      <tr>
+        <td>
+          <common-featured-half-block
+            section-id=91066,
+            limit=2,
+            date=date,
+            newsletter=newsletter,
+            primary-color=primaryColor,
+            align="left",
+          />
+          <common-table width="300" style="border-collapse:collapse;" align=align class="main" padding=0 spacing=0>
+            <tr>
+              <td valign="top">
+                <common-ad-wrapper-block
+                  newsletter=newsletter
+                  date=date
+                  primary-color=primaryColor
+                  promotion-component="half-native-block"
+                  placement-id=get(nativeX, `placements.${newsletter.alias}.toc-1`)
+                />
+                <common-ad-wrapper-block
+                  newsletter=newsletter
+                  date=date
+                  primary-color=primaryColor
+                  promotion-component="half-native-block"
+                  placement-id=get(nativeX, `placements.${newsletter.alias}.toc-2`)
+                />
+              </td>
+            </tr>
+          </common-table>
+        </td>
+      </tr>
+    </common-table>
+
+    <if(nativeX && mindful)>
+      <common-newsletter-data
+        newsletter=newsletter
+        date=date
+        primary-color=primaryColor
+        section-name=input.sectionName
+      />
+    </if>
+    <else>
+      <common-feed-block
+        section-id=91065,
+        date=date,
+        newsletter=newsletter,
+        primary-color=primaryColor,
+        sequence=1
+      />
+      <common-ad-wrapper-block
+        newsletter=newsletter
+        date=date
+        primary-color=primaryColor
+        promotion-component="full-native-block"
+        placement-id=get(nativeX, `placements.${newsletter.alias}.inline-1`)
+      />
+      <common-feed-block
+        section-id=91065,
+        date=date,
+        newsletter=newsletter,
+        primary-color=primaryColor,
+        sequence=3
+      />
+      <common-ad-wrapper-block
+        newsletter=newsletter
+        date=date
+        primary-color=primaryColor
+        promotion-component="full-native-block"
+        placement-id=get(nativeX, `placements.${newsletter.alias}.inline-2`)
+      />
+      <common-feed-block
+        section-id=91065,
+        date=date,
+        newsletter=newsletter,
+        primary-color=primaryColor,
+        sequence=5
+      />
+      <common-ad-wrapper-block
+        newsletter=newsletter
+        date=date
+        primary-color=primaryColor
+        promotion-component="full-native-block"
+        placement-id=get(nativeX, `placements.${newsletter.alias}.inline-3`)
+      />
+      <common-feed-block
+        section-id=91065,
+        date=date,
+        newsletter=newsletter,
+        primary-color=primaryColor,
+        sequence=7
+      />
+      <common-ad-wrapper-block
+        newsletter=newsletter
+        date=date
+        primary-color=primaryColor
+        promotion-component="full-native-block"
+        placement-id=get(nativeX, `placements.${newsletter.alias}.inline-4`)
+      />
+      <common-feed-block
+        section-id=91065,
+        date=date,
+        newsletter=newsletter,
+        primary-color=primaryColor,
+        sequence=9
+      />
+      <common-ad-wrapper-block
+        newsletter=newsletter
+        date=date
+        primary-color=primaryColor
+        promotion-component="full-native-block"
+        placement-id=get(nativeX, `placements.${newsletter.alias}.inline-5`)
+      />
+      <common-feed-block
+        section-id=91065,
+        date=date,
+        newsletter=newsletter,
+        primary-color=primaryColor,
+        sequence=11
+      />
+    </else>
+
+    <common-featured-full-block
+      section-id=91064,
+      limit=1,
+      title="FEATURED VIDEO",
+      date=date,
+      newsletter=newsletter,
+      primary-color=primaryColor,
+      hr-below=true,
+    />
+
+    <common-magazine-block
+      date=date
+      publication-id="5669c7d177ab469a0ed0aaf4"
+      title="MAGAZINE"
+      subscribe-text="<a href='https://tcc.dragonforms.com/loading.do?omedasite=TCC1_IEnew' target='_blank' style='text-decoration:none;color:#c93a3a;'>Subscribe</a> to IEN Magazine"
+      newsletter=newsletter
+    />
+
+    <!-- Footer/OptOut -->
+    <common-default-footer-block advertise-page-link="https://www.ien.com/formstack/advertise_with_im_ien" />
+
+  </@body>
+</marko-newsletter-root>
